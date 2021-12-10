@@ -1012,20 +1012,38 @@ const input = `101011111001
 101101011011
 100011101011`;
 
-const currentInput = example;
+const currentInput = input;
 const inputArray = currentInput.split("\n");
+let bitArrayz = [];
 
 inputArray.forEach((bit, i) => {
   inputArray[i] = bit.split("");
 });
 
 inputArray.forEach((bitArray, i) => {
-// sum each index and then if it's more than half total index it's 1 else 0 
+  bitArray.forEach((bitArrayInner, j) => {
+    bitArrayz[j] = ( typeof bitArrayz[j] != 'undefined' && bitArrayz[j] instanceof Array ) ? bitArrayz[j] : [];
+    bitArrayz[j].push(bitArrayInner);
+  });
+});
+
+function mode(arr){
+  return arr.sort((a,b) =>
+  arr.filter(v => v===a).length
+  - arr.filter(v => v===b).length
+).pop();
 }
 
-console.log(inputArray);
+let gammaRate = '';
+bitArrayz.forEach((binary, i) => {
+  gammaRate += mode(binary).toString();
+});
 
-let gammaRate = '10110';
+console.log(inputArray);
+console.log(bitArrayz);
+console.log({gammaRate});
+
+// let gammaRate = '10110';
 // let epsilonRateArr = gammaRate.split("").map(x => ( x == 1 ? 0 : 1 ) );
 // let epsilonRate = '';
 // epsilonRateArr.forEach((bit, i) => {
