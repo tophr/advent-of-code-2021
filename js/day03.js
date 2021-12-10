@@ -1027,6 +1027,8 @@ inputArray.forEach((bitArray, i) => {
   });
 });
 
+// thx stackoverflow
+// https://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
 function mode(arr){
   return arr.sort((a,b) =>
   arr.filter(v => v===a).length
@@ -1039,19 +1041,39 @@ bitArrayz.forEach((binary, i) => {
   gammaRate += mode(binary).toString();
 });
 
-console.log(inputArray);
-console.log(bitArrayz);
-console.log({gammaRate});
-
-// let gammaRate = '10110';
+// my dumb way
 // let epsilonRateArr = gammaRate.split("").map(x => ( x == 1 ? 0 : 1 ) );
 // let epsilonRate = '';
 // epsilonRateArr.forEach((bit, i) => {
 //   epsilonRate += bit.toString();
 // });
+// with stackoverflow's help
 const flipbits = str => str.split('').map(b => (1 - b).toString()).join('');
 let epsilonRate = flipbits(gammaRate);
 // console.log(epsilonRate);
 
 let powerConsumption = parseInt(gammaRate, 2) * parseInt(epsilonRate, 2);
 console.log('part 1 is ' + powerConsumption);
+
+// part two
+let oxygenGenerator = '';
+let co2scrubber = '';
+
+inputArray.forEach((bitArray, i) => {
+  bitArrayz[j]
+  bitArray.forEach((bitArrayInner, j) => {
+    bitArrayz[j] = ( typeof bitArrayz[j] != 'undefined' && bitArrayz[j] instanceof Array ) ? bitArrayz[j] : [];
+    bitArrayz[j].push(bitArrayInner);
+  });
+});
+
+gammaRate.split("").forEach((mostCommonBit, i) => {
+  let filteredIndexes = [];
+  // bitArrayz[i].reduce()
+  if ( mostCommonBit == bitArrayz[i][0] ) {
+    filteredIndexes.push(i);
+  }
+});
+
+let lifeSupport = oxygenGenerator * co2scrubber;
+console.log('part 2 is ' + lifeSupport );
